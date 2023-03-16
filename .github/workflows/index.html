@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Navicat数据检索</title>
+	<meta charset="utf-8">
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+		input[type=text] {
+			padding: 6px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			width: 100%;
+			margin-bottom: 12px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Navicat数据检索</h1>
+	<form>
+		<label for="table">选择要导入的表格：</label>
+		<select id="table">
+			<option value="">请选择表格</option>
+			<option value="table1">表格1</option>
+			<option value="table2">表格2</option>
+			<option value="table3">表格3</option>
+		</select>
+		<br><br>
+		<label for="search">搜索：</label>
+		<input type="text" id="search" placeholder="输入关键字">
+		<br><br>
+		<button type="button" onclick="searchTable()">搜索</button>
+	</form>
+	<br>
+	<table id="myTable">
+		<thead>
+			<tr>
+				<th>列1</th>
+				<th>列2</th>
+				<th>列3</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>数据1</td>
+				<td>数据2</td>
+				<td>数据3</td>
+			</tr>
+			<tr>
+				<td>数据4</td>
+				<td>数据5</td>
+				<td>数据6</td>
+			</tr>
+			<tr>
+				<td>数据7</td>
+				<td>数据8</td>
+				<td>数据9</td>
+			</tr>
+		</tbody>
+	</table>
+	<script>
+		function searchTable() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("search");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td");
+				for (var j = 0; j < td.length; j++) {
+					txtValue = td[j].textContent || td[j].innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+						break;
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>
